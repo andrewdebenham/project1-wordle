@@ -25,7 +25,7 @@ let currentWord;
 // resetButtonElement
 
 const squareElements = document.querySelectorAll('.sqr');
-console.log(squareElements);
+const keyboardElements = document.querySelectorAll('.key');
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -43,9 +43,11 @@ const init = () => {
     render();
 }
 
+
 const render = () => {
     updateBoard();
 }
+
 
 const updateBoard = () => {
     board.forEach((row, rowIndex) => {
@@ -56,28 +58,26 @@ const updateBoard = () => {
     });
 }
 
-// handleClick()
-// Handle a player clicking the keyboard
-
-// handleInput()
-// handle a player using their keyboard to input letters
-// potentially combine this into one function with handleClick
 
 const handleInput = (event) => {
+    // assign input to constant
+    const input = convertEventToInput(event);
     // expression to match letters a-z or A-Z
     const letterRegex = /^[a-zA-Z]$/
 
-    if (letterRegex.test(event.key)) {
-        // if the key is a letter, add it to the board
+    if (letterRegex.test(input)) {
+        // if input is a letter, add it to the board
         for (let i = 0; i < board[0].length; i++) {
+            // loop through row to find next available empty square
             if (board[currentRowIndex][i] === '') {
-                board[currentRowIndex][i] = event.key.toUpperCase();
+                board[currentRowIndex][i] = input;
                 break;
             }
         }
-    } else if (event.key === 'Backspace') {
-        // if the key is backspace, remove last entered character
+    } else if (input === 'BACKSPACE' || input === 'BACK') {
+        // if input is backspace, remove last entered character
         for (let i = 0; i < board[0].length; i++) {
+            // loop through row to find the most recently filled square
             if (board[currentRowIndex][i + 1] === '') {
                 board[currentRowIndex][i] = '';
                 break;
@@ -88,8 +88,20 @@ const handleInput = (event) => {
         }
     }
 
+    // handle enter key (user submits guess)
     // else if (event.key === 'Enter')
     updateBoard();
+}
+
+
+const convertEventToInput = (event) => {
+    let input;
+    if (event.type === 'click') {
+        input = event.target.textContent.toUpperCase();
+    } else {
+        input = event.key.toUpperCase();
+    }
+    return input;
 }
 
 
@@ -102,11 +114,12 @@ const handleInput = (event) => {
 // create some form of reset / new game functionality
 
 /*----------------------------- Event Listeners -----------------------------*/
-// add an event listener to each row / square
-// event listener should listen for input via either the on-screen keyboard or users keyboard
-// user inputs one letter at a time, beggining at the first box of the current row
 
 document.body.addEventListener('keydown', handleInput);
+
+keyboardElements.forEach((element) => {
+    element.addEventListener('click', handleInput);
+});
 
 
 /*------------------------------ Call Functions -----------------------------*/
@@ -119,8 +132,36 @@ init();
 
 
 
-/* Graveyard
+/* ------------------------------ Graveyard ---------------------------------*/
+/*
 
+const handleClick = (event) => {
+    console.log(event);
+    const letterRegex = /^[A-Z]$/
+    if (letterRegex.test(event.target.textContent)) {
+        // if the key is a letter, add it to the board
+        for (let i = 0; i < board[0].length; i++) {
+            // loop through row to find next available empty square
+            if (board[currentRowIndex][i] === '') {
+                board[currentRowIndex][i] = event.target.textContent;
+                break;
+            }
+        }
+    } else if (event.target.textContent === 'Back') {
+        // if the key is backspace, remove last entered character
+        for (let i = 0; i < board[0].length; i++) {
+            // loop through row to find the most recently filled square
+            if (board[currentRowIndex][i + 1] === '') {
+                board[currentRowIndex][i] = '';
+                break;
+            } else if (board[currentRowIndex].every(str => str !== '')) {
+                board[currentRowIndex][4] = '';
+                break;
+            }
+        }
+    }
 
+    updateBoard();
+}
 
 */
