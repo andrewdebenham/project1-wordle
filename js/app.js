@@ -86,11 +86,23 @@ const handleInput = (event) => {
                 break;
             }
         }
+    } else if (input === 'ENTER') {
+        handleSubmit(input);
     }
 
     // handle enter key (user submits guess)
     // else if (event.key === 'Enter')
     updateBoard();
+}
+
+
+const handleSubmit = (input) => {
+    console.log(input);
+    // if 5 letters and data contains board[currentRowIndex].join(' ')
+        // checkAnswer
+    // else if not 5 letters
+        // shake row effect
+        // "not enough letters"
 }
 
 
