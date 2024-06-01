@@ -89,3 +89,24 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
 }
+
+.spin {
+  animation: spin 1s linear;
+}
+
+@keyframes spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.correct {
+  background-color: #80EF80;
+}
+
+.present {
+  background-color: #FDFD96;
+}
+
+.absent {
+  background-color: #cfcfc4;
+}

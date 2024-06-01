@@ -40,6 +40,8 @@ const init = () => {
     ]
     currentRowIndex = 0;
     gameOver = false;
+    currentWord = words[getRandomNum()].toUpperCase();
+    console.log(`The word is '${currentWord}'`);
     render();
 }
 
@@ -100,11 +102,26 @@ const handleSubmit = (input) => {
     console.log(input);
     // if 5 letters and data contains board[currentRowIndex].join(' ')
         // checkAnswer
+    if (board[currentRowIndex].every(str => str !== '')) {
+        const answer = board[currentRowIndex].join('').toLowerCase();
+        console.log(`The answer is '${answer}'`);
+        checkAnswer(answer);
+    }
     // else if not 5 letters
         // shake row effect
         // "not enough letters"
 }
 
+
+const checkAnswer = (answer) => {
+    if (words.includes(answer)) {
+        renderRow();
+        currentRowIndex += 1;
+    } else {
+        // Pop up "invalid answer"
+        console.log("invalid answer")
+    }
+}
 
 const convertEventToInput = (event) => {
     let input;
@@ -114,6 +131,29 @@ const convertEventToInput = (event) => {
         input = event.key.toUpperCase();
     }
     return input;
+}
+
+const getRandomNum = () => Math.floor(Math.random() * words.length)
+
+const renderRow = () => {
+    const currentRowElement = document.querySelector(`#row${currentRowIndex}`);
+    const squares = currentRowElement.querySelectorAll('.sqr');
+    
+    for (let i = 0; i < squares.length; i++) {
+        const letter = squares[i].textContent;
+
+        // Apply spinning effect
+        squares[i].classList.add("spin");
+
+        // // Determine which color to apply
+        if (letter === currentWord[i]) {
+            squares[i].classList.add("correct");
+        } else if (currentWord.includes(letter)) {
+            squares[i].classList.add("present");
+        } else {
+            squares[i].classList.add("absent");
+        }
+    }
 }
 
 
