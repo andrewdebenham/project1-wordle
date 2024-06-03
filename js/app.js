@@ -92,8 +92,6 @@ const handleInput = (event) => {
         handleSubmit(input);
     }
 
-    // handle enter key (user submits guess)
-    // else if (event.key === 'Enter')
     updateBoard();
 }
 
@@ -138,21 +136,30 @@ const getRandomNum = () => Math.floor(Math.random() * words.length)
 const renderRow = () => {
     const currentRowElement = document.querySelector(`#row${currentRowIndex}`);
     const squares = currentRowElement.querySelectorAll('.sqr');
+    const keys = document.querySelectorAll('.key');
     
     for (let i = 0; i < squares.length; i++) {
         const letter = squares[i].textContent;
 
-        // Apply spinning effect
+        // Apply spinning effect ----------- come back to this -> want squares to spin one by one, not same time
         squares[i].classList.add("spin");
 
-        // // Determine which color to apply
-        if (letter === currentWord[i]) {
-            squares[i].classList.add("correct");
-        } else if (currentWord.includes(letter)) {
-            squares[i].classList.add("present");
-        } else {
-            squares[i].classList.add("absent");
-        }
+        // Determine which color to apply
+        keys.forEach((key) => {
+            if (key.textContent === letter) {
+                if (letter === currentWord[i]) {
+                    squares[i].classList.add("correct");
+                    key.classList.add("correct");
+                } else if (currentWord.includes(letter)) {
+                    squares[i].classList.add("present");
+                    key.classList.add("present");
+                } else {
+                    squares[i].classList.add("absent");
+                    key.classList.add("absent");
+                }
+            }
+            
+        })
     }
 }
 

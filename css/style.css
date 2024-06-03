@@ -99,14 +99,14 @@ h2 {
   to { transform: rotateY(360deg); }
 }
 
-.correct {
-  background-color: #80EF80;
+.absent {
+  background-color: #cfcfc4;
 }
 
 .present {
   background-color: #FDFD96;
 }
 
-.absent {
-  background-color: #cfcfc4;
+.correct {
+  background-color: #80EF80;
 }
