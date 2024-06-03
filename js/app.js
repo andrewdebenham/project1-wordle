@@ -26,6 +26,8 @@ let currentWord;
 
 const squareElements = document.querySelectorAll('.sqr');
 const keyboardElements = document.querySelectorAll('.key');
+const messageElement = document.querySelector('#message');
+const resetButtonElement = document.querySelector('#reset');
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -37,19 +39,27 @@ const init = () => {
         ['', '', '', '', ''],
         ['', '', '', '', ''],
         ['', '', '', '', '']
-    ]
+    ];
     currentRowIndex = 0;
     gameOver = false;
     currentWord = words[getRandomNum()].toUpperCase();
+    messageElement.textContent = '';
     console.log(`The word is '${currentWord}'`);
-    render();
-}
 
-
-const render = () => {
+    resetElementClasses();
+    resetButtonElement.blur();
     updateBoard();
 }
 
+const resetElementClasses = () => {
+    squareElements.forEach((sqr) => {
+        sqr.classList.remove("correct", "present", "absent", "spin");
+    });
+
+    keyboardElements.forEach((key) => {
+        key.classList.remove("correct", "present", "absent");
+    });
+}
 
 const updateBoard = () => {
     board.forEach((row, rowIndex) => {
@@ -62,6 +72,8 @@ const updateBoard = () => {
 
 
 const handleInput = (event) => {
+    // ignore input if game is over
+    if (gameOver) return;
     // assign input to constant
     const input = convertEventToInput(event);
     // expression to match letters a-z or A-Z
@@ -89,20 +101,18 @@ const handleInput = (event) => {
             }
         }
     } else if (input === 'ENTER') {
-        handleSubmit(input);
+        handleSubmit();
     }
 
     updateBoard();
 }
 
 
-const handleSubmit = (input) => {
-    console.log(input);
+const handleSubmit = () => {
     // if 5 letters and data contains board[currentRowIndex].join(' ')
         // checkAnswer
     if (board[currentRowIndex].every(str => str !== '')) {
         const answer = board[currentRowIndex].join('').toLowerCase();
-        console.log(`The answer is '${answer}'`);
         checkAnswer(answer);
     }
     // else if not 5 letters
@@ -114,12 +124,25 @@ const handleSubmit = (input) => {
 const checkAnswer = (answer) => {
     if (words.includes(answer)) {
         renderRow();
+        checkGameOver(answer);
         currentRowIndex += 1;
     } else {
         // Pop up "invalid answer"
         console.log("invalid answer")
     }
 }
+
+
+const checkGameOver = (answer) => {
+    if (answer.toUpperCase() === currentWord) {
+        messageElement.textContent = 'Congratulations! You guessed the word!'
+        gameOver = true;
+    } else if (currentRowIndex >= board.length - 1) {
+        messageElement.textContent = `Game Over! The word was ${currentWord}`;
+        gameOver = true;
+    }
+}
+
 
 const convertEventToInput = (event) => {
     let input;
@@ -164,14 +187,6 @@ const renderRow = () => {
 }
 
 
-// checkGuess()
-// create a function to reveal the correct / incorrect / almost letters for the concurrent guess
-// this can only happen once the player has submit their guess by either clicking or hitting the enter key
-// player should not be able to submit a guess if it is not a word included in our game data
-
-// reset()
-// create some form of reset / new game functionality
-
 /*----------------------------- Event Listeners -----------------------------*/
 
 document.body.addEventListener('keydown', handleInput);
@@ -179,6 +194,8 @@ document.body.addEventListener('keydown', handleInput);
 keyboardElements.forEach((element) => {
     element.addEventListener('click', handleInput);
 });
+
+resetButtonElement.addEventListener('click', init);
 
 
 /*------------------------------ Call Functions -----------------------------*/
