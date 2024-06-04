@@ -114,6 +114,9 @@ const handleSubmit = () => {
     if (board[currentRowIndex].every(str => str !== '')) {
         const answer = board[currentRowIndex].join('').toLowerCase();
         checkAnswer(answer);
+    } else {
+        messageElement.textContent = 'Not enough letters';
+        shakeEffect();
     }
     // else if not 5 letters
         // shake row effect
@@ -123,12 +126,13 @@ const handleSubmit = () => {
 
 const checkAnswer = (answer) => {
     if (words.includes(answer)) {
+        messageElement.textContent = '';
         renderRow();
         checkGameOver(answer);
         currentRowIndex += 1;
     } else {
-        // Pop up "invalid answer"
-        console.log("invalid answer")
+        messageElement.textContent = 'Not in word list';
+        shakeEffect();
     }
 }
 
@@ -184,6 +188,16 @@ const renderRow = () => {
             
         })
     }
+}
+
+
+const shakeEffect = () => {
+    const currentRowElement = document.querySelector(`#row${currentRowIndex}`);
+    currentRowElement.classList.add("shake");
+
+    setTimeout(() => {
+        currentRowElement.classList.remove("shake");
+    }, 500);
 }
 
 

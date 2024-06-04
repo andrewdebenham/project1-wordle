@@ -42,13 +42,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.sqr:hover {
-  background-color: #80EF80;
-  /* green: #44AF69 yellow: #FDFD96 */
 }
 
 .keyboard {
@@ -97,6 +91,18 @@ h2 {
 @keyframes spin {
   from { transform: rotateY(0deg); }
   to { transform: rotateY(360deg); }
+}
+
+@keyframes horizontal-shake {
+  0% { transform: translateX(0px); }
+  25% { transform: translateX(5px); }
+  50% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+  100% { transform: translateX(0px); }
+}
+
+.shake {
+  animation: horizontal-shake 0.3s linear;
 }
 
 .absent {
