@@ -14,6 +14,31 @@
 </head>
 
 <body>
+    <div class="instructions">
+        <div class="instructions-title">
+            <h2>Welcome to 'wordle' - by Andy Debenham</h2>
+            <h4>How to Play</h4>
+        </div>
+        <div class="instructions-content">
+            <ul>
+                <li>You have 6 attmepts to guess the word</li>
+                <li>Each guess must be a valid 5-letter word</li>
+                <li>The tile colour changes according to how close your guess was to the word</li>
+            </ul>
+            <div class="instructions-example">
+            <p><strong>Example</strong></p>
+            <div class="correct">B</div>
+            <div class="absent">A</div>
+            <div class="absent">D</div>
+            <div class="absent">G</div>
+            <div class="present">E</div>
+            <p><strong>B </strong>is in the word and in the correct position.</p>
+            <p><strong>A, D</strong> and <strong>G</strong> are not in the word.</p>
+            <p><strong>E</strong> is in the word but in the wrong position.</p>
+            </div>
+        </div>
+        <button class="play-button">Play</button>
+    </div>
     <h1>wordle</h1>
     <h2 id="message"></h2>
     <button id="reset">Play Again?</button>

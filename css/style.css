@@ -118,3 +118,52 @@ h2 {
 .correct {
   background-color: #80EF80;
 }
+
+.instructions {
+  position: fixed;
+  display: flex;
+  padding: 20px;
+  width: 350px;
+  min-height: 400px;
+  background-color: #F2F4FF;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  border-radius: 50px;
+}
+
+.instructions-title {
+  margin: 10px 10px 0 10px;
+}
+
+.instructions-content {
+  font-family: sans-serif;
+  text-align: left;
+  padding-left: 0;
+}
+
+.instructions-content ul {
+  padding: 0 0 15px 15px;
+}
+
+.instructions-example div {
+  display: inline-block;
+  border: 2px solid;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+}
+
+.play-button {
+  padding: 5px 10px;
+  background-color: #F2C078;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.play-button:hover {
+  background-color: #FE5D26;
+}
