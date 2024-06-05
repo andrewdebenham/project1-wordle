@@ -5,7 +5,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Orbitron", sans-serif;
 }
 
@@ -15,7 +15,7 @@ h1 {
 
 h2 {
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .board {
@@ -76,12 +76,14 @@ h2 {
 }
 
 #reset {
-  margin-top: 20px;
+  margin-bottom: 30px;
+  padding: 5px;
   font-family: "Orbitron", sans-serif;
   background-color: #F2C078;
   border: 1px solid #000;
   border-radius: 5px;
   cursor: pointer;
+  display: block;
 }
 
 .spin {

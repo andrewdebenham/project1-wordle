@@ -1,15 +1,4 @@
-/*----------------------------------- Data ----------------------------------*/
-// In a separate game-data.js file store the 5-letter words to be cycled through in the game
-
-/*-------------------------------- Constants --------------------------------*/
-
-
-
 /*---------------------------- Variables (state) ----------------------------*/
-// Define the required variables used to track the state of the game
-// track the state of the board
-// track which row / level player is on
-// winner / gameOver
 
 let board;
 let currentRowIndex;
@@ -17,12 +6,6 @@ let gameOver;
 let currentWord;
 
 /*------------------------ Cached Element References ------------------------*/
-// Store cached element references
-// boardElement
-// squareElements
-// rowElements
-// messageElement
-// resetButtonElement
 
 const squareElements = document.querySelectorAll('.sqr');
 const keyboardElements = document.querySelectorAll('.key');
@@ -48,8 +31,10 @@ const init = () => {
 
     resetElementClasses();
     resetButtonElement.blur();
+    resetButtonElement.style.display = "none";
     updateBoard();
 }
+
 
 const resetElementClasses = () => {
     squareElements.forEach((sqr) => {
@@ -60,6 +45,7 @@ const resetElementClasses = () => {
         key.classList.remove("correct", "present", "absent");
     });
 }
+
 
 const updateBoard = () => {
     board.forEach((row, rowIndex) => {
@@ -109,7 +95,7 @@ const handleInput = (event) => {
 
 
 const handleSubmit = () => {
-    // if 5 letters and data contains board[currentRowIndex].join(' ')
+    // if 5 letters and word is in word list
         // checkAnswer
     if (board[currentRowIndex].every(str => str !== '')) {
         const answer = board[currentRowIndex].join('').toLowerCase();
@@ -118,9 +104,6 @@ const handleSubmit = () => {
         messageElement.textContent = 'Not enough letters';
         shakeEffect();
     }
-    // else if not 5 letters
-        // shake row effect
-        // "not enough letters"
 }
 
 
@@ -139,11 +122,13 @@ const checkAnswer = (answer) => {
 
 const checkGameOver = (answer) => {
     if (answer.toUpperCase() === currentWord) {
-        messageElement.textContent = 'Congratulations! You guessed the word!'
+        messageElement.textContent = 'Congratulations! You win!'
         gameOver = true;
+        resetButtonElement.style.display = "block";
     } else if (currentRowIndex >= board.length - 1) {
         messageElement.textContent = `Game Over! The word was ${currentWord}`;
         gameOver = true;
+        resetButtonElement.style.display = "block";
     }
 }
 
@@ -168,7 +153,7 @@ const renderRow = () => {
     for (let i = 0; i < squares.length; i++) {
         const letter = squares[i].textContent;
 
-        // Apply spinning effect ----------- come back to this -> want squares to spin one by one, not same time
+        // Apply spin animation
         squares[i].classList.add("spin");
 
         // Determine which color to apply
@@ -204,25 +189,20 @@ const shakeEffect = () => {
 /*----------------------------- Event Listeners -----------------------------*/
 
 document.body.addEventListener('keydown', handleInput);
+resetButtonElement.addEventListener('click', init);
 
 keyboardElements.forEach((element) => {
     element.addEventListener('click', handleInput);
 });
 
-resetButtonElement.addEventListener('click', init);
 
 
-/*------------------------------ Call Functions -----------------------------*/
+/*------------------------------ Initiate Game ------------------------------*/
 
 init();
 
 
-
-
-
-
-
-/* ------------------------------ Graveyard ---------------------------------*/
+/* ------------------------------- Graveyard --------------------------------*/
 /*
 
 const handleClick = (event) => {
