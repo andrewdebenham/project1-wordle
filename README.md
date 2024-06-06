@@ -39,6 +39,5 @@ Javascript
 ## Future Enhancements
 
 * Add a dark and/or retro arcade mode
-* Add a win streak accumulator
 * Store data on the client machine to track win/loss history
 * Expand the word list

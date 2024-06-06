@@ -4,6 +4,7 @@ let board;
 let currentRowIndex;
 let gameOver;
 let currentWord;
+let winStreak = 0;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -14,6 +15,7 @@ const resetButtonElement = document.querySelector('#reset');
 const playButtonElement = document.querySelector('.play-button');
 const instructionsElement = document.querySelector('.instructions');
 const helpButtonElement = document.querySelector('.help');
+const winStreakElement = document.querySelector('.win-streak');
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -130,10 +132,14 @@ const checkGameOver = (answer) => {
     if (answer.toUpperCase() === currentWord) {
         messageElement.textContent = 'Congratulations! You win!'
         gameOver = true;
+        winStreak += 1;
+        winStreakElement.textContent = `Win Streak: ${winStreak}`;
         resetButtonElement.style.display = "block";
     } else if (currentRowIndex >= board.length - 1) {
         messageElement.textContent = `Game Over! The word was ${currentWord}`;
         gameOver = true;
+        winStreak = 0;
+        winStreakElement.textContent = `Win Streak: ${winStreak}`;
         resetButtonElement.style.display = "block";
     }
 }
