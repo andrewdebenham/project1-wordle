@@ -11,6 +11,9 @@ const squareElements = document.querySelectorAll('.sqr');
 const keyboardElements = document.querySelectorAll('.key');
 const messageElement = document.querySelector('#message');
 const resetButtonElement = document.querySelector('#reset');
+const playButtonElement = document.querySelector('.play-button');
+const instructionsElement = document.querySelector('.instructions');
+const helpButtonElement = document.querySelector('.help');
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -195,6 +198,15 @@ keyboardElements.forEach((element) => {
     element.addEventListener('click', handleInput);
 });
 
+playButtonElement.addEventListener('click', () => {
+    instructionsElement.classList.remove('animate__bounceInDown');
+    instructionsElement.classList.add('animate__bounceOutUp');
+});
+
+helpButtonElement.addEventListener('click', () => {
+    instructionsElement.classList.remove('animate__bounceOutUp');
+    instructionsElement.classList.add('animate__bounceInDown');
+});
 
 
 /*------------------------------ Initiate Game ------------------------------*/

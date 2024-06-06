@@ -167,3 +167,26 @@ h2 {
 .play-button:hover {
   background-color: #FE5D26;
 }
+
+.help {
+  position: fixed;
+  display: flex;
+  top: 30px;
+  right: 40px;
+  z-index: 1000;
+  border: 2px solid black;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.help:hover {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  top: 25px;
+  right: 35px;
+}
