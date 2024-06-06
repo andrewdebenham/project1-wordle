@@ -87,8 +87,8 @@ h2 {
   }
 
   .key {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
 
   .key-wide {
@@ -235,7 +235,7 @@ h2 {
 .win-streak {
   position: fixed;
   display: flex;
-  top: 30px;
+  top: 32px;
   right: 100px;
   z-index: 1000;
   height: 25px;
