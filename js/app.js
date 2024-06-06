@@ -18,6 +18,7 @@ const helpButtonElement = document.querySelector('.help');
 /*-------------------------------- Functions --------------------------------*/
 
 const init = () => {
+    // reset the game state
     board = [
         ['', '', '', '', ''],
         ['', '', '', '', ''],
@@ -53,6 +54,7 @@ const resetElementClasses = () => {
 const updateBoard = () => {
     board.forEach((row, rowIndex) => {
         row.forEach((sqr, sqrIndex) => {
+            // loop through each square of each row of the board element and update text according to the board array
             let sqrElIdx = rowIndex * board[0].length + sqrIndex;
             squareElements[sqrElIdx].textContent = board[rowIndex][sqrIndex];
         });
@@ -98,8 +100,7 @@ const handleInput = (event) => {
 
 
 const handleSubmit = () => {
-    // if 5 letters and word is in word list
-        // checkAnswer
+    // if 5 letters submitted -> check answer for validity
     if (board[currentRowIndex].every(str => str !== '')) {
         const answer = board[currentRowIndex].join('').toLowerCase();
         checkAnswer(answer);
@@ -111,6 +112,7 @@ const handleSubmit = () => {
 
 
 const checkAnswer = (answer) => {
+    // if valid answer -> render the row accordingly and check for win
     if (words.includes(answer)) {
         messageElement.textContent = '';
         renderRow();
@@ -124,6 +126,7 @@ const checkAnswer = (answer) => {
 
 
 const checkGameOver = (answer) => {
+    // Check for game over conditions and deliver appropriate message
     if (answer.toUpperCase() === currentWord) {
         messageElement.textContent = 'Congratulations! You win!'
         gameOver = true;
@@ -137,6 +140,7 @@ const checkGameOver = (answer) => {
 
 
 const convertEventToInput = (event) => {
+    // standardise the input based on the event type
     let input;
     if (event.type === 'click') {
         input = event.target.textContent.toUpperCase();
@@ -146,13 +150,15 @@ const convertEventToInput = (event) => {
     return input;
 }
 
+
 const getRandomNum = () => Math.floor(Math.random() * words.length)
+
 
 const renderRow = () => {
     const currentRowElement = document.querySelector(`#row${currentRowIndex}`);
     const squares = currentRowElement.querySelectorAll('.sqr');
     const keys = document.querySelectorAll('.key');
-    
+
     for (let i = 0; i < squares.length; i++) {
         const letter = squares[i].textContent;
 
@@ -173,7 +179,6 @@ const renderRow = () => {
                     key.classList.add("absent");
                 }
             }
-            
         })
     }
 }
@@ -212,38 +217,3 @@ helpButtonElement.addEventListener('click', () => {
 /*------------------------------ Initiate Game ------------------------------*/
 
 init();
-
-
-/* ------------------------------- Graveyard --------------------------------*/
-/*
-
-const handleClick = (event) => {
-    console.log(event);
-    const letterRegex = /^[A-Z]$/
-    if (letterRegex.test(event.target.textContent)) {
-        // if the key is a letter, add it to the board
-        for (let i = 0; i < board[0].length; i++) {
-            // loop through row to find next available empty square
-            if (board[currentRowIndex][i] === '') {
-                board[currentRowIndex][i] = event.target.textContent;
-                break;
-            }
-        }
-    } else if (event.target.textContent === 'Back') {
-        // if the key is backspace, remove last entered character
-        for (let i = 0; i < board[0].length; i++) {
-            // loop through row to find the most recently filled square
-            if (board[currentRowIndex][i + 1] === '') {
-                board[currentRowIndex][i] = '';
-                break;
-            } else if (board[currentRowIndex].every(str => str !== '')) {
-                board[currentRowIndex][4] = '';
-                break;
-            }
-        }
-    }
-
-    updateBoard();
-}
-
-*/

@@ -9,6 +9,12 @@ body {
   font-family: "Orbitron", sans-serif;
 }
 
+@media (max-width: 500px) {
+  body {
+    margin: 0 15px;
+  }
+}
+
 h1 {
   margin-bottom: 10px;
 }
@@ -67,7 +73,8 @@ h2 {
   transition: background-color 0.3s;
 }
 
-.key:hover, #reset:hover {
+.key:hover,
+#reset:hover {
   background-color: #FE5D26;
 }
 
@@ -91,16 +98,35 @@ h2 {
 }
 
 @keyframes spin {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
 @keyframes horizontal-shake {
-  0% { transform: translateX(0px); }
-  25% { transform: translateX(5px); }
-  50% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-  100% { transform: translateX(0px); }
+  0% {
+    transform: translateX(0px);
+  }
+
+  25% {
+    transform: translateX(5px);
+  }
+
+  50% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
 }
 
 .shake {
