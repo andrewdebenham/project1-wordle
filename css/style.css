@@ -9,12 +9,6 @@ body {
   font-family: "Orbitron", sans-serif;
 }
 
-@media (max-width: 500px) {
-  body {
-    margin: 0 15px;
-  }
-}
-
 h1 {
   margin-bottom: 10px;
 }
@@ -80,6 +74,26 @@ h2 {
 
 .key-wide {
   width: 64px;
+}
+
+@media (max-width: 500px) {
+  .board {
+    justify-content: center;
+  }
+
+  .sqr {
+    width: 58px;
+    font-size: 32px;
+  }
+
+  .key {
+    width: 30px;
+    height: 30px;
+  }
+
+  .key-wide {
+    width: 54px;
+  }
 }
 
 #reset {
@@ -221,7 +235,7 @@ h2 {
 .win-streak {
   position: fixed;
   display: flex;
-  top: 32px;
+  top: 30px;
   right: 100px;
   z-index: 1000;
   height: 25px;
