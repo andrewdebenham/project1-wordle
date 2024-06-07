@@ -33,7 +33,7 @@ const init = () => {
     gameOver = false;
     currentWord = words[getRandomNum()].toUpperCase();
     messageElement.textContent = '';
-    console.log(`The word is '${currentWord}'`);
+    // console.log(`The word is '${currentWord}'`);
 
     resetElementClasses();
     resetButtonElement.blur();
